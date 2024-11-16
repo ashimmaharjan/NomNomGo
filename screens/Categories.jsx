@@ -13,7 +13,7 @@ const Categories = () => {
       showsHorizontalScrollIndicator={false}
     >
       {/* Categories Cards */}
-      <View className="flex-row justify-around  w-screen">
+      <View className="flex-row justify-around w-screen">
         <CategoryCard title="Test 1" imgUrl="https://links.papareact.com/wru" />
         <CategoryCard title="Test 2" imgUrl="https://links.papareact.com/wru" />
         <CategoryCard title="Test 3" imgUrl="https://links.papareact.com/wru" />

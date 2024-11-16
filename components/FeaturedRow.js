@@ -24,8 +24,8 @@ const FeaturedRow = ({ title, description, featuredCategory }) => {
         <RestaurantCard
           id="1"
           imgUrl="https://links.papareact.com/gn7"
-          title="Yo! Sushi"
-          genre="Japanese"
+          title="Yo! Goldaddu"
+          genre="Viet"
           address="123 Main St"
           short_description="Test desc"
           dishes={[]}
