@@ -39,6 +39,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'genre',
+      type: 'string',
+      title: 'Restaurant Genre',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'rating',
       type: 'string',
       title: 'Enter rating from 1-5 stars.',

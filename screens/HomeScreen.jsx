@@ -110,18 +110,6 @@ const HomeScreen = () => {
               description={category.short_description}
             />
           ))}
-
-          <FeaturedRow
-            title="Tasty Discounts"
-            description="Paid placements from our partners."
-            featuredCategory="featured"
-          />
-
-          <FeaturedRow
-            title="Offers near you!"
-            description="Paid placements from our partners."
-            featuredCategory="featured"
-          />
         </ScrollView>
       </ScrollView>
     </SafeAreaView>

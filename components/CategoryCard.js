@@ -9,8 +9,9 @@ const CategoryCard = ({ imgUrl, title }) => {
         source={{
           uri: imgUrl,
         }}
+        resizeMode="cover"
       />
-      <Text className="absolute bottom-1 left-1 text-white font-bold">
+      <Text className="absolute bottom-1 left-1 text-white text-sm">
         {title}
       </Text>
     </TouchableOpacity>
