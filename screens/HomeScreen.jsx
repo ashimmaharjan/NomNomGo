@@ -78,8 +78,8 @@ const HomeScreen = () => {
         </View>
 
         {/* Search */}
-        <View className="flex-row items-center space-x-2 pb-2 mx-4">
-          <View className="flex-row space-x-2 flex-1 bg-gray-200 p-3 rounded-lg drop-shadow">
+        <View className="flex-row items-center gap-2 pb-2 mx-4">
+          <View className="flex-row gap-2 flex-1 bg-gray-200 p-3 rounded-lg drop-shadow">
             <MagnifyingGlassIcon color="gray" />
             <TextInput
               className="w-full px-2 outline-none border-collapse text-gray-600"
