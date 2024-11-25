@@ -11,8 +11,14 @@ import React, { useMemo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRestaurant } from "../features/restaurantSlice";
-import { selectBasketItems } from "../features/basketSlice";
+import {
+  removeFromBasket,
+  selectBasketItems,
+  selectBasketTotal,
+} from "../features/basketSlice";
 import { XCircleIcon } from "react-native-heroicons/solid";
+import { urlFor } from "../sanity";
+import Currency from "react-currency-formatter";
 
 const BasketScreen = () => {
   const navigation = useNavigation();
@@ -20,6 +26,7 @@ const BasketScreen = () => {
   const items = useSelector(selectBasketItems);
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
   const dispatch = useDispatch();
+  const basketTotal = useSelector(selectBasketTotal);
 
   useMemo(() => {
     const groupedItems = items.reduce((results, item) => {
@@ -61,12 +68,66 @@ const BasketScreen = () => {
         </View>
 
         <ScrollView>
-          {Object.entries(groupedItemsInBasket).map((key, items) => {
-            <View key={key}>
-              <Text>{items.length}x </Text>
-            </View>;
-          })}
+          {Object.entries(groupedItemsInBasket).map(([key, items]) => (
+            <View
+              key={key}
+              className="flex-row items-center gap-3 bg-white py-2 px-5"
+            >
+              <Text className="text-gray-600">{items.length}x</Text>
+              <Image
+                source={{ uri: urlFor(items[0]?.image).url() }}
+                className="h-12 w-12 rounded-full"
+              />
+
+              <Text className="text-gray-600 flex-1">{items[0]?.name}</Text>
+
+              <Text className="text-gray-600">
+                <Currency currency="AUD" quantity={items[0]?.price} />
+              </Text>
+
+              <TouchableOpacity>
+                <Text
+                  onPress={() => dispatch(removeFromBasket({ id: key }))}
+                  className="text-[#00ccbb] text-sm"
+                >
+                  Remove
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ))}
         </ScrollView>
+
+        <View className="p-5 bg-white mt-5 gap-y-4">
+          <View className="flex-row justify-between">
+            <Text className="text-gray-400">Subtotal</Text>
+            <Text className="text-gray-400">
+              <Currency quantity={basketTotal} currency="AUD" />
+            </Text>
+          </View>
+
+          <View className="flex-row justify-between">
+            <Text className="text-gray-400">Delivery Fee</Text>
+            <Text className="text-gray-400">
+              <Currency quantity={5.99} currency="AUD" />
+            </Text>
+          </View>
+
+          <View className="flex-row justify-between">
+            <Text>Order Total</Text>
+            <Text className="font-extrabold">
+              <Currency quantity={basketTotal + 5.99} currency="AUD" />
+            </Text>
+          </View>
+
+          <TouchableOpacity
+            className="rounded-lg bg-[#00ccbb] p-4"
+            onPress={() => navigation.navigate("PreparingOrderScreen")}
+          >
+            <Text className="text-center text-white text-lg font-bold">
+              Place Order
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
